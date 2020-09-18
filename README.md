@@ -52,22 +52,24 @@ Algos, Workflows, Utilities
 
 **Data Prep and Transformation**
 
-    Intro to pre-processing
-        -	Normalize numeric data
-            o	From original range to 0 to 1
-            o	from pyspark.ml feature import minmaxscaler
-            o	from pyspark.ml.linalg import Vectors
-            o	features_df = spark.createDataFrame([
-                (1, Vectors.dense([10.0, 10000.0,  1.0]), ),
-                (2, Vectors.dense([20.0, 30000.0,  2.0]), ),
-                (3, Vectors.dense([30.0, 40000.0,  3.0]),)
-                 ], [“id”, “features”])
-            o	features_df.take(1)
-            o	feature_scaler = MinMaxScaler(inputCol = “features”, outputCol=”sfeatures”)
-            o	smodel = feature_scaler.fit(features_df)
-            o	sfeatures_df = smodel.transform(features_df)
-            o	sfeatures_df.take(1)
-            o	sfeatures_df.select(“features”, “sfeatures”).show()
+Intro to pre-processing
+
+-	Normalize numeric data
+o	From original range to 0 to 1
+o	from pyspark.ml feature import minmaxscaler
+o	from pyspark.ml.linalg import Vectors
+o	features_df = spark.createDataFrame([
+       (1, Vectors.dense([10.0, 10000.0,  1.0]), ),
+       (2, Vectors.dense([20.0, 30000.0,  2.0]), ),
+       (3, Vectors.dense([30.0, 40000.0,  3.0]),)
+       ], [“id”, “features”])
+o	features_df.take(1)
+o	feature_scaler = MinMaxScaler(inputCol = “features”, outputCol=”sfeatures”)
+o	smodel = feature_scaler.fit(features_df)
+o	sfeatures_df = smodel.transform(features_df)
+o	sfeatures_df.take(1)
+o	sfeatures_df.select(“features”, “sfeatures”).show()
+     
 -	Standardize numeric data
 o	Mao data values from their original range to -1 to 1
 o	Mean value of 0
@@ -99,6 +101,7 @@ o	b_df.show()
 o	bucketizer = Bucketizer(splits=splits, inputCol=”features”, outputCol=”bfeatures”)
 o	bucketed_df = bucketizer.transform(b_df)
 o	bucketed_df.show()
+
 -	Text: Tokenizing
 o	Single string to a set of token
 o	from pyspark.ml.feature import Tokenizer
@@ -111,12 +114,11 @@ o	sentences_df.show()
 o	sent_token = Tokenizer(inputCol =”sentence”, outputCol=”words”) //col names
 o	sent_tokenized_df = sent_token.transform(sentences_df)
 o	sent_tokenized_df.show()
+
 -	TF-IDF
 o	From a single, long string, to a vector indicating the frequency of each word in a text relative to a group of texts
 o	Infrequently used words are more useful for distinguishing categories of text
 o	from pyspark.ml.feature import HashingTF
-o	
--	
 
 
 
