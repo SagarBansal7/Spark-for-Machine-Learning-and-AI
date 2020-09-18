@@ -51,7 +51,7 @@ emp_mgrs_df.select(“salary”).show()
 Algos, Workflows, Utilities
 
 **Data Prep and Transformation**
-
+````
 Intro to pre-processing
 
 -	Normalize numeric data
@@ -120,7 +120,7 @@ o	From a single, long string, to a vector indicating the frequency of each word 
 o	Infrequently used words are more useful for distinguishing categories of text
 o	from pyspark.ml.feature import HashingTF
 
-
+````
 
 
 
