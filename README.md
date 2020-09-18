@@ -50,7 +50,7 @@ emp_mgrs_df.select(“salary”).show()
 **Components of Spark Mlib**
 Algos, Workflows, Utilities
 
-**Data Prep and Transformation**
+##Data Prep and Transformation
 ````
 Intro to pre-processing
 
@@ -118,9 +118,34 @@ o	sent_tokenized_df.show()
 -	TF-IDF
 o	From a single, long string, to a vector indicating the frequency of each word in a text relative to a group of texts
 o	Infrequently used words are more useful for distinguishing categories of text
-o	from pyspark.ml.feature import HashingTF
-
+o	from pyspark.ml.feature import HashingTF, IDF
+o      hashingTF = HashingTF(inputCol="words", outputCol = "rawFeatures", numFeatures=20)
+o      sent_hfTF_df = hashingTF.transform(sent_tokenized_df)
+o      sent_hfTF_df.take(1)
+o      idf = IDF(inputCol="rawFeatures", outputCol="idf_features")
+o      idfModel = idf.fit(sent_hfTF_df)
+o      ifidf_df = idfModel.transform(sent_hfTF_df)
+o      tfidf_df.take(1)
+    
 ````
+
+## Recommendations
+-      Collaborative Filtering
+-      Content-Based Filtering
+
+Spark MLlib supports collaborative filtering
+
+**Preprocessing - Collaborative Filtering**
+- Alternating least squares
+- Import ALS from pyspark.ml.recommendation
+- Build a Datafarme of user-item ratings
+
+**Create an ALS object**
+- UserCol
+- itemCol
+- ratingCol
+
+**Train model using fit**
 
 
 
