@@ -1,4 +1,4 @@
-# Spark
+# Spark for Machine Learning and AI
 -	Distributed
 -	Processing
 -	Big Data
@@ -22,7 +22,9 @@ b.	Executing algo to fit data to models
 c.	Tuning hyperparameters
 3)	Validation
 a.	Applying model to additional tests
+
 Installation
+````
 -	Java -version
 -	cd ..
 -	cd ..
@@ -30,7 +32,9 @@ Installation
 -	cd spark
 -	cd bin
 -	.\pyspark
+````
 Open file
+````
 emp_df = spark.read.csv(“”)
 emp_df.schema
 emp_df.columns
@@ -41,28 +45,29 @@ sample_df.count()
 emp_mgrs_df = emp_df.filter(“salary >=100000”)
 emp_mgrs_df.count()
 emp_mgrs_df.select(“salary”).show()
+````
 
---
-Components of Spark Mlib
+**Components of Spark Mlib**
 Algos, Workflows, Utilities
---
-Data Prep and Transformation
-Intro to pre-processing
--	Normalize numeric data
-o	From original range to 0 to 1
-o	from pyspark.ml feature import minmaxscaler
-o	from pyspark.ml.linalg import Vectors
-o	features_df = spark.createDataFrame([
-	(1, Vectors.dense([10.0, 10000.0,  1.0]), ),
-	(2, Vectors.dense([20.0, 30000.0,  2.0]), ),
-	(3, Vectors.dense([30.0, 40000.0,  3.0]),)
-	], [“id”, “features”])
-o	features_df.take(1)
-o	feature_scaler = MinMaxScaler(inputCol = “features”, outputCol=”sfeatures”)
-o	smodel = feature_scaler.fit(features_df)
-o	sfeatures_df = smodel.transform(features_df)
-o	sfeatures_df.take(1)
-o	sfeatures_df.select(“features”, “sfeatures”).show()
+
+**Data Prep and Transformation**
+
+    Intro to pre-processing
+        -	Normalize numeric data
+            o	From original range to 0 to 1
+            o	from pyspark.ml feature import minmaxscaler
+            o	from pyspark.ml.linalg import Vectors
+            o	features_df = spark.createDataFrame([
+                (1, Vectors.dense([10.0, 10000.0,  1.0]), ),
+                (2, Vectors.dense([20.0, 30000.0,  2.0]), ),
+                (3, Vectors.dense([30.0, 40000.0,  3.0]),)
+                 ], [“id”, “features”])
+            o	features_df.take(1)
+            o	feature_scaler = MinMaxScaler(inputCol = “features”, outputCol=”sfeatures”)
+            o	smodel = feature_scaler.fit(features_df)
+            o	sfeatures_df = smodel.transform(features_df)
+            o	sfeatures_df.take(1)
+            o	sfeatures_df.select(“features”, “sfeatures”).show()
 -	Standardize numeric data
 o	Mao data values from their original range to -1 to 1
 o	Mean value of 0
