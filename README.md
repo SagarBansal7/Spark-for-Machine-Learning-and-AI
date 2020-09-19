@@ -129,6 +129,11 @@ o      tfidf_df.take(1)
     
 ````
 
+## Regression
+- Preprocessing
+o
+
+
 ## Recommendations
 -      Collaborative Filtering
 -      Content-Based Filtering
@@ -146,6 +151,37 @@ Spark MLlib supports collaborative filtering
 - ratingCol
 
 **Train model using fit**
+
+**Validation**
+- Create predictions using a transform of an ALS model using test data
+- Create a RegressionEvaluator object
+- Evaluate predictions using the evaluate function of the RegressionEvaluator
+
+## Process Summary
+**Preprocessing**
+- Load data into DF
+- Include headers, or column names, in text files
+- Use inferSchema=True
+- Use VectorAssembler to create feature vectors
+- Use StringIndexer to map from string to numeric indexes
+
+**Building Models**
+- Split data into training and test sets
+- Fit models using training data
+- Create predictions by applying a transform to the test data
+
+**Validating Models**
+- Use MLib evaluators (MulticlassClassificationEvaluator, RegressionEvaluator)
+- Experiment with multiple algorithms
+- Vary hyperparamenters
+
+For future, we can explore:
+- MLlib Docs
+- Kaggle
+- AWS Data Sets
+
+
+
 
 
 
