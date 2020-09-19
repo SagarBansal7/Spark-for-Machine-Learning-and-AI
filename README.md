@@ -128,15 +128,47 @@ o      ifidf_df = idfModel.transform(sent_hfTF_df)
 o      tfidf_df.take(1)
     
 ````
+## Clustering
+- K-means clustering
+- Hierarchical clustering
+
+## Classification
+- Preprocessing
+- Naive Bayes classification
+- Multilayer perceptron classification
+````
+o from pyspark.ml.classification import MultiplayerPerceptronCLassifier
+//first layer has the same number of nodes as the number of inputs
+//last layer has the same number of nodes as the number of outputs
+o layers = [4,5,5,3]
+o mlp = MultilayerPerceptronClassifier(layers=layers, seed=1)
+o mlp_model = mlp.fit(train_df)
+o mlp_predicitons = mlp_model.transform(test_df)
+o mlp_evaluator = MulticlassClassificationEvaluator(metricName="accuracy")
+o mlp_accuracy = mlp_evaluator.evaluate(mlp_predictions)
+o mlp_accuracy
+
+````
+- Decision tree classification
 
 ## Regression
 - Preprocessing
-o
-
+- Linear Regression
+- Decision tree regression
+- Gradient-boosted tree regression
+````
+o from pyspark.ml.regression import GBTRegressor
+o gbt = GBTRegressor(featuresCol="features", labelCol="PE")
+o gbt_model = gbt.fit(train_df)
+o gbt_model = gbt_model.transform(test_df)
+o gbt_evaluator = RegressionEvaluator(labelCol="PE", predictionCol="prediction", metricName="rmse")
+o gbt_rmse = gbt_evaluator.evaluate(gbt_predictions)
+0 gbt_rmse
+````
 
 ## Recommendations
--      Collaborative Filtering
--      Content-Based Filtering
+- Collaborative Filtering
+- Content-Based Filtering
 
 Spark MLlib supports collaborative filtering
 
