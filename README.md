@@ -50,8 +50,8 @@ emp_mgrs_df.select(“salary”).show()
 **Components of Spark Mlib**
 Algos, Workflows, Utilities
 
-##Data Prep and Transformation
-````
+## Data Prep and Transformation
+````scala
 Intro to pre-processing
 
 -	Normalize numeric data
