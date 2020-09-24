@@ -12,19 +12,19 @@
 
 **Steps in ML**
 1)	Pre-processing
-    a.	Extract, transform, and load data to staging area
-    b.	Review data for missing data and invalid values
-    c.	Normalize and scale numeric data
-    d.	Standardize categorical data
+    *	Extract, transform, and load data to staging area
+    *	Review data for missing data and invalid values
+    *	Normalize and scale numeric data
+    *	Standardize categorical data
 2)	Model Building
-    a.	Selecting algos
-    b.	Executing algo to fit data to models
-    c.	Tuning hyperparameters
+    *	Selecting algos
+    *	Executing algo to fit data to models
+    *	Tuning hyperparameters
 3)	Validation
-    a.	Applying model to additional tests
+    *	Applying model to additional tests
 
-Installation
-````
+**Installation**
+````cmd
 -	Java -version
 -	cd ..
 -	cd ..
@@ -33,12 +33,12 @@ Installation
 -	cd bin
 -	.\pyspark
 ````
-Open file
-````
+**Open file**
+````python
 emp_df = spark.read.csv(“”)
 emp_df.schema
 emp_df.columns
-emp_df.take(5) – first five
+emp_df.take(5) #first five
 emp_df.count()
 sample_df = emp_df.sample(False, 0.1)
 sample_df.count()
