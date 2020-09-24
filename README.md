@@ -36,13 +36,16 @@
 **Open file**
 ````python
 emp_df = spark.read.csv(“”)
-emp_df.schema
-emp_df.columns
+emp_df.schema #returns the schema
+emp_df.columns # returns the columns
 emp_df.take(5) #first five
 emp_df.count()
 sample_df = emp_df.sample(False, 0.1)
 sample_df.count()
+
+#Filter all employess with salary greater than 100000
 emp_mgrs_df = emp_df.filter(“salary >=100000”)
+#Count all employess with salary greater than 100000
 emp_mgrs_df.count()
 emp_mgrs_df.select(“salary”).show()
 ````
