@@ -12,16 +12,16 @@
 
 **Steps in ML**
 1)	Pre-processing
-a.	Extract, transform, and load data to staging area
-b.	Review data for missing data and invalid values
-c.	Normalize and scale numeric data
-d.	Standardize categorical data
+    a.	Extract, transform, and load data to staging area
+    b.	Review data for missing data and invalid values
+    c.	Normalize and scale numeric data
+    d.	Standardize categorical data
 2)	Model Building
-a.	Selecting algos
-b.	Executing algo to fit data to models
-c.	Tuning hyperparameters
+    a.	Selecting algos
+    b.	Executing algo to fit data to models
+    c.	Tuning hyperparameters
 3)	Validation
-a.	Applying model to additional tests
+    a.	Applying model to additional tests
 
 Installation
 ````
