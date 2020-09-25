@@ -35,7 +35,7 @@
 ````
 **Open file**
 ````python
-emp_df = spark.read.csv(“”)
+emp_df = spark.read.csv(“file path”)
 emp_df.schema #returns the schema
 emp_df.columns # returns the columns
 emp_df.take(5) #first five
@@ -43,9 +43,9 @@ emp_df.count()
 sample_df = emp_df.sample(False, 0.1)
 sample_df.count()
 
-#Filter all employess with salary greater than 100000
+#Filter all employees with salary greater than 100000
 emp_mgrs_df = emp_df.filter(“salary >=100000”)
-#Count all employess with salary greater than 100000
+#Count all employees with salary greater than 100000
 emp_mgrs_df.count()
 emp_mgrs_df.select(“salary”).show()
 ````
@@ -58,92 +58,103 @@ emp_mgrs_df.select(“salary”).show()
 ## Data Prep and Transformation
 ### Intro to pre-processing
 
+1) Normalize numeric data
 ````python
-
--	Normalize numeric data
-o	From original range to 0 to 1
-o	from pyspark.ml feature import minmaxscaler
-o	from pyspark.ml.linalg import Vectors
-o	features_df = spark.createDataFrame([
-       (1, Vectors.dense([10.0, 10000.0,  1.0]), ),
-       (2, Vectors.dense([20.0, 30000.0,  2.0]), ),
-       (3, Vectors.dense([30.0, 40000.0,  3.0]),)
-       ], [“id”, “features”])
-o	features_df.take(1)
-o	feature_scaler = MinMaxScaler(inputCol = “features”, outputCol=”sfeatures”)
-o	smodel = feature_scaler.fit(features_df)
-o	sfeatures_df = smodel.transform(features_df)
-o	sfeatures_df.take(1)
-o	sfeatures_df.select(“features”, “sfeatures”).show()
-     
--	Standardize numeric data
-o	Mao data values from their original range to -1 to 1
-o	Mean value of 0
-o	Normally distributed with std deviation of 1
-o	Used when attributes have different scales and ML algos assumer a normal distribution
-o	from pyspark.ml.feature import StandardScaler
-o	from pyspark.ml.linalg import Vectors
-o	features_df = spark.createDataFrame([
-	(1, Vectors.dense([10.0, 10000.0,  1.0]), ),
-	(2, Vectors.dense([20.0, 30000.0,  2.0]), ),
-	(3, Vectors.dense([30.0, 40000.0,  3.0]),)
-	], [“id”, “features”])
-o	features_df.take(1)
-o	feature_stand_scaler = StandardScaler(inputCol=”features”, outputCol=”sfeatures”, withStd = True, withMean = True)
-o	standa_smodel = feature_stand_scaler.fit(feature_df)
-o	stand_sfeatures_df = stand_smodel.transform(features_df)
-o	stand_sfeatures_df.take(1)
-o	stand_sfeatures_df.show()
-
--	Partitioning numeric data
-o	From continuous to buckets
-o	Deciles and percentiles are examples of buckets
-o	Useful when you want to work with groups of values instead of a continuous range of values
-o	from pyspark.ml.feature import Bucketizer
-o	splits = [-float(“inf”), -10, 0, 10, float(“inf”)]
-o	b_data = [(-800.0), (-10.5,), (-1.7,), (0,), (8.2,), (90.1,)]
-o	b_df = spark.createDataFrame(b_data, [“features”])
-o	b_df.show()
-o	bucketizer = Bucketizer(splits=splits, inputCol=”features”, outputCol=”bfeatures”)
-o	bucketed_df = bucketizer.transform(b_df)
-o	bucketed_df.show()
-
--	Text: Tokenizing
-o	Single string to a set of token
-o	from pyspark.ml.feature import Tokenizer
-o	sentences_df = spark.createDataFrame([
-	(1,”This is an introduction to Spark MLlib”), 
-	(2, “MLlib includes libraries for classifications and regression”),
-	(3, “It also contains supporting tools for pipelines”)],
-	[“id”, “sentence”])
-o	sentences_df.show()
-o	sent_token = Tokenizer(inputCol =”sentence”, outputCol=”words”) //col names
-o	sent_tokenized_df = sent_token.transform(sentences_df)
-o	sent_tokenized_df.show()
-
--	TF-IDF
-o	From a single, long string, to a vector indicating the frequency of each word in a text relative to a group of texts
-o	Infrequently used words are more useful for distinguishing categories of text
-o	from pyspark.ml.feature import HashingTF, IDF
-o      hashingTF = HashingTF(inputCol="words", outputCol = "rawFeatures", numFeatures=20)
-o      sent_hfTF_df = hashingTF.transform(sent_tokenized_df)
-o      sent_hfTF_df.take(1)
-o      idf = IDF(inputCol="rawFeatures", outputCol="idf_features")
-o      idfModel = idf.fit(sent_hfTF_df)
-o      ifidf_df = idfModel.transform(sent_hfTF_df)
-o      tfidf_df.take(1)
-    
+from original range to 0 to 1
+from pyspark.ml feature import minmaxscaler
+from pyspark.ml.linalg import Vectors
+features_df = spark.createDataFrame([
+    (1, Vectors.dense([10.0, 10000.0,  1.0]), ),
+    (2, Vectors.dense([20.0, 30000.0,  2.0]), ),
+    (3, Vectors.dense([30.0, 40000.0,  3.0]),)
+    ], [“id”, “features”])
+features_df.take(1)
+feature_scaler = MinMaxScaler(inputCol = “features”, outputCol=”sfeatures”)
+smodel = feature_scaler.fit(features_df)
+sfeatures_df = smodel.transform(features_df)
+sfeatures_df.take(1)
+sfeatures_df.select(“features”, “sfeatures”).show()
 ````
+2)	Standardize numeric data
+* Make data values from their original range to -1 to 1.
+* Mean value of 0.
+* Normally distributed with std deviation of 1.
+* Used when attributes have different scales and ML algorithms assumes a normal distribution.
+
+````python
+from pyspark.ml.feature import StandardScaler
+from pyspark.ml.linalg import Vectors
+features_df = spark.createDataFrame([
+	(1, Vectors.dense([10.0, 10000.0,  1.0]), ),
+	(2, Vectors.dense([20.0, 30000.0,  2.0]), ),
+	(3, Vectors.dense([30.0, 40000.0,  3.0]),)
+	], [“id”, “features”])
+features_df.take(1)
+feature_stand_scaler = StandardScaler(inputCol=”features”, outputCol=”sfeatures”, withStd = True, withMean = True)
+standa_smodel = feature_stand_scaler.fit(feature_df)
+stand_sfeatures_df = stand_smodel.transform(features_df)
+stand_sfeatures_df.take(1)
+stand_sfeatures_df.show()
+````
+
+3)	Partitioning numeric data
+*	From continuous to buckets of data.
+*	Deciles and percentiles are examples of buckets.
+*	Useful when you want to work with groups of values instead of a continuous range of values.
+
+````python
+from pyspark.ml.feature import Bucketizer
+splits = [-float(“inf”), -10, 0, 10, float(“inf”)]
+b_data = [(-800.0), (-10.5,), (-1.7,), (0,), (8.2,), (90.1,)]
+b_df = spark.createDataFrame(b_data, [“features”])
+b_df.show()
+bucketizer = Bucketizer(splits=splits, inputCol=”features”, outputCol=”bfeatures”)
+bucketed_df = bucketizer.transform(b_df)
+bucketed_df.show()
+````
+
+4)	Text: Tokenizing
+*	Single string to a set of token.
+
+````python
+from pyspark.ml.feature import Tokenizer
+sentences_df = spark.createDataFrame([
+	(1,”This is an introduction to Spark MLlib”), 
+	(2, “MLlib includes libraries for classifications and regression”),
+	(3, “It also contains supporting tools for pipelines”)],
+	[“id”, “sentence”])
+sentences_df.show()
+sent_token = Tokenizer(inputCol =”sentence”, outputCol=”words”) //col names
+sent_tokenized_df = sent_token.transform(sentences_df)
+sent_tokenized_df.show()
+````
+
+5)	TF-IDF
+*	From a single, long string, to a vector indicating the frequency of each word in a text relative to a group of texts.
+*	Infrequently used words are more useful for distinguishing categories of text.
+
+````python
+from pyspark.ml.feature import HashingTF, IDF
+hashingTF = HashingTF(inputCol="words", outputCol = "rawFeatures", numFeatures=20)
+sent_hfTF_df = hashingTF.transform(sent_tokenized_df)
+sent_hfTF_df.take(1)
+idf = IDF(inputCol="rawFeatures", outputCol="idf_features")
+idfModel = idf.fit(sent_hfTF_df)
+ifidf_df = idfModel.transform(sent_hfTF_df)
+tfidf_df.take(1)
+````
+
 ## Clustering
-- K-means clustering
-- Hierarchical clustering
+* K-means clustering
+* Hierarchical clustering
 
 ## Classification
-- Preprocessing
-- Naive Bayes classification
-- Multilayer perceptron classification
-````
-o from pyspark.ml.classification import MultiplayerPerceptronCLassifier
+* Preprocessing
+* Naive Bayes classification
+* Multilayer perceptron classification
+
+````python
+from pyspark.ml.classification import MultiplayerPerceptronCLassifier
 //first layer has the same number of nodes as the number of inputs
 //last layer has the same number of nodes as the number of outputs
 o layers = [4,5,5,3]
