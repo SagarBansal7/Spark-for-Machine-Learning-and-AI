@@ -145,69 +145,69 @@ tfidf_df.take(1)
 ````
 
 ## Clustering
-* K-means clustering
-* Hierarchical clustering
+* K-means Clustering
+* Hierarchical Clustering
 
 ## Classification
 * Preprocessing
-* Naive Bayes classification
-* Multilayer perceptron classification
+* Naive Bayes Classification
+* Decision tree Classification
+* Multilayer perceptron Classification
 
 ````python
 from pyspark.ml.classification import MultiplayerPerceptronCLassifier
-//first layer has the same number of nodes as the number of inputs
-//last layer has the same number of nodes as the number of outputs
-o layers = [4,5,5,3]
-o mlp = MultilayerPerceptronClassifier(layers=layers, seed=1)
-o mlp_model = mlp.fit(train_df)
-o mlp_predicitons = mlp_model.transform(test_df)
-o mlp_evaluator = MulticlassClassificationEvaluator(metricName="accuracy")
-o mlp_accuracy = mlp_evaluator.evaluate(mlp_predictions)
-o mlp_accuracy
-
+#first layer has the same number of nodes as the number of inputs
+#last layer has the same number of nodes as the number of outputs
+layers = [4,5,5,3]
+mlp = MultilayerPerceptronClassifier(layers=layers, seed=1)
+mlp_model = mlp.fit(train_df)
+mlp_predicitons = mlp_model.transform(test_df)
+mlp_evaluator = MulticlassClassificationEvaluator(metricName="accuracy")
+mlp_accuracy = mlp_evaluator.evaluate(mlp_predictions)
+mlp_accuracy
 ````
-- Decision tree classification
 
 ## Regression
-- Preprocessing
-- Linear Regression
-- Decision tree regression
-- Gradient-boosted tree regression
-````
-o from pyspark.ml.regression import GBTRegressor
-o gbt = GBTRegressor(featuresCol="features", labelCol="PE")
-o gbt_model = gbt.fit(train_df)
-o gbt_model = gbt_model.transform(test_df)
-o gbt_evaluator = RegressionEvaluator(labelCol="PE", predictionCol="prediction", metricName="rmse")
-o gbt_rmse = gbt_evaluator.evaluate(gbt_predictions)
-0 gbt_rmse
+* Preprocessing
+* Linear Regression
+* Decision Tree Regression
+* Gradient-boosted Tree Regression
+
+````python
+from pyspark.ml.regression import GBTRegressor
+gbt = GBTRegressor(featuresCol="features", labelCol="PE")
+gbt_model = gbt.fit(train_df)
+gbt_model = gbt_model.transform(test_df)
+gbt_evaluator = RegressionEvaluator(labelCol="PE", predictionCol="prediction", metricName="rmse")
+gbt_rmse = gbt_evaluator.evaluate(gbt_predictions)
+gbt_rmse
 ````
 
 ## Recommendations
-- Collaborative Filtering
-- Content-Based Filtering
+* Collaborative Filtering
+* Content-Based Filtering
 
-Spark MLlib supports collaborative filtering
+### Spark MLlib supports collaborative filtering
 
-**Preprocessing - Collaborative Filtering**
-- Alternating least squares
-- Import ALS from pyspark.ml.recommendation
-- Build a Datafarme of user-item ratings
+1) Preprocessing - Collaborative Filtering
+* Alternating least squares.
+* Import ALS from pyspark.ml.recommendation.
+* Build a datafarme of user-item ratings.
 
-**Create an ALS object**
-- UserCol
-- itemCol
-- ratingCol
+2) Create an ALS object
+* UserCol
+* itemCol
+* ratingCol
 
-**Train model using fit**
+3) Train model using fit
 
-**Validation**
-- Create predictions using a transform of an ALS model using test data
-- Create a RegressionEvaluator object
-- Evaluate predictions using the evaluate function of the RegressionEvaluator
+4) Validation
+* Create predictions using a transform of an ALS model using test data.
+* Create a RegressionEvaluator object.
+* Evaluate predictions using the evaluate function of the RegressionEvaluator.
 
 ## Process Summary
-**Preprocessing**
+1) Preprocessing
 - Load data into DF
 - Include headers, or column names, in text files
 - Use inferSchema=True
