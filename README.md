@@ -208,26 +208,26 @@ gbt_rmse
 
 ## Process Summary
 1) Preprocessing
-- Load data into DF
-- Include headers, or column names, in text files
-- Use inferSchema=True
-- Use VectorAssembler to create feature vectors
-- Use StringIndexer to map from string to numeric indexes
+* Load data into DF.
+* Include headers, or column names, in text files.
+* Use inferSchema=True.
+* Use VectorAssembler to create feature vectors.
+* Use StringIndexer to map from string to numeric indexes.
 
-**Building Models**
-- Split data into training and test sets
-- Fit models using training data
-- Create predictions by applying a transform to the test data
+2) Building Models
+* Split data into training and test sets.
+* Fit models using training data.
+* Create predictions by applying a transform to the test data.
 
-**Validating Models**
-- Use MLib evaluators (MulticlassClassificationEvaluator, RegressionEvaluator)
-- Experiment with multiple algorithms
-- Vary hyperparamenters
+3) Validating Models
+* Use MLib evaluators (MulticlassClassificationEvaluator, RegressionEvaluator).
+* Experiment with multiple algorithms.
+* Vary hyperparamenters.
 
-For future, we can explore:
-- MLlib Docs
-- Kaggle
-- AWS Data Sets
+#### For future, explore:
+* MLlib Docs
+* Kaggle
+* AWS Data Sets
 
 
 
