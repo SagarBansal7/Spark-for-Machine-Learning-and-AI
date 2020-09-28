@@ -1,16 +1,16 @@
 # Spark for Machine Learning and AI
 
 **Spark**
-    * Distributed
-    * Processing
-    * Big Data
-    * Modular Architecture
+* Distributed
+* Processing
+* Big Data
+* Modular Architecture
 
 **Use Cases**
-    * Real-time monitoring
-    * Text analysis
-    * Ecommerce pattern analysis
-    * Healthcare and genomic analysis
+* Real-time monitoring
+* Text analysis
+* Ecommerce pattern analysis
+* Healthcare and genomic analysis
 
 **Steps in ML**
 1)	Pre-processing
@@ -53,9 +53,9 @@ emp_mgrs_df.select(“salary”).show()
 ````
 
 **Components of Spark Mlib**
-    * Algos
-    * Workflows
-    * Utilities
+* Algos
+* Workflows
+* Utilities
 
 ## Data Prep and Transformation
 ### Intro to pre-processing
@@ -147,14 +147,14 @@ tfidf_df.take(1)
 ````
 
 ## Clustering
-    * K-means Clustering
-    * Hierarchical Clustering
+* K-means Clustering
+* Hierarchical Clustering
 
 ## Classification
-    * Preprocessing
-    * Naive Bayes Classification
-    * Decision tree Classification
-    * Multilayer perceptron Classification
+* Preprocessing
+* Naive Bayes Classification
+* Decision tree Classification
+* Multilayer perceptron Classification
 
 ````python
 from pyspark.ml.classification import MultiplayerPerceptronCLassifier
@@ -170,10 +170,10 @@ mlp_accuracy
 ````
 
 ## Regression
-    * Preprocessing
-    * Linear Regression
-    * Decision Tree Regression
-    * Gradient-boosted Tree Regression
+* Preprocessing
+* Linear Regression
+* Decision Tree Regression
+* Gradient-boosted Tree Regression
 
 ````python
 from pyspark.ml.regression import GBTRegressor
@@ -186,8 +186,8 @@ gbt_rmse
 ````
 
 ## Recommendations
-    * Collaborative Filtering
-    * Content-Based Filtering
+* Collaborative Filtering
+* Content-Based Filtering
 
 ### Spark MLlib supports collaborative filtering
 
@@ -227,9 +227,9 @@ gbt_rmse
     * Vary hyperparamenters.
 
 #### For future, explore:
-    * MLlib Docs
-    * Kaggle
-    * AWS Data Sets
+* MLlib Docs
+* Kaggle
+* AWS Data Sets
 
 
 
