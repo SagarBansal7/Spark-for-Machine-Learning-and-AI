@@ -1,14 +1,16 @@
 # Spark for Machine Learning and AI
--	Distributed
--	Processing
--	Big Data
-- Modular Architecture
+
+**Spark**
+    * Distributed
+    * Processing
+    * Big Data
+    * Modular Architecture
 
 **Use Cases**
--	Real-time monitoring
--	Text analysis
--	Ecommerce pattern analysis
--	Healthcare and genomic analysis
+    * Real-time monitoring
+    * Text analysis
+    * Ecommerce pattern analysis
+    * Healthcare and genomic analysis
 
 **Steps in ML**
 1)	Pre-processing
@@ -51,9 +53,9 @@ emp_mgrs_df.select(“salary”).show()
 ````
 
 **Components of Spark Mlib**
-* Algos
-* Workflows
-* Utilities
+    * Algos
+    * Workflows
+    * Utilities
 
 ## Data Prep and Transformation
 ### Intro to pre-processing
@@ -76,10 +78,10 @@ sfeatures_df.take(1)
 sfeatures_df.select(“features”, “sfeatures”).show()
 ````
 2)	Standardize numeric data
-* Make data values from their original range to -1 to 1.
-* Mean value of 0.
-* Normally distributed with std deviation of 1.
-* Used when attributes have different scales and ML algorithms assumes a normal distribution.
+    * Make data values from their original range to -1 to 1.
+    * Mean value of 0.
+    * Normally distributed with std deviation of 1.
+    * Used when attributes have different scales and ML algorithms assumes a normal distribution.
 
 ````python
 from pyspark.ml.feature import StandardScaler
@@ -98,9 +100,9 @@ stand_sfeatures_df.show()
 ````
 
 3)	Partitioning numeric data
-*	From continuous to buckets of data.
-*	Deciles and percentiles are examples of buckets.
-*	Useful when you want to work with groups of values instead of a continuous range of values.
+    * From continuous to buckets of data.
+    * Deciles and percentiles are examples of buckets.
+    * Useful when you want to work with groups of values instead of a continuous range of values.
 
 ````python
 from pyspark.ml.feature import Bucketizer
@@ -114,7 +116,7 @@ bucketed_df.show()
 ````
 
 4)	Text: Tokenizing
-*	Single string to a set of token.
+    * Single string to a set of token.
 
 ````python
 from pyspark.ml.feature import Tokenizer
@@ -130,8 +132,8 @@ sent_tokenized_df.show()
 ````
 
 5)	TF-IDF
-*	From a single, long string, to a vector indicating the frequency of each word in a text relative to a group of texts.
-*	Infrequently used words are more useful for distinguishing categories of text.
+    * From a single, long string, to a vector indicating the frequency of each word in a text relative to a group of texts.
+    * Infrequently used words are more useful for distinguishing categories of text.
 
 ````python
 from pyspark.ml.feature import HashingTF, IDF
@@ -145,14 +147,14 @@ tfidf_df.take(1)
 ````
 
 ## Clustering
-* K-means Clustering
-* Hierarchical Clustering
+    * K-means Clustering
+    * Hierarchical Clustering
 
 ## Classification
-* Preprocessing
-* Naive Bayes Classification
-* Decision tree Classification
-* Multilayer perceptron Classification
+    * Preprocessing
+    * Naive Bayes Classification
+    * Decision tree Classification
+    * Multilayer perceptron Classification
 
 ````python
 from pyspark.ml.classification import MultiplayerPerceptronCLassifier
@@ -168,10 +170,10 @@ mlp_accuracy
 ````
 
 ## Regression
-* Preprocessing
-* Linear Regression
-* Decision Tree Regression
-* Gradient-boosted Tree Regression
+    * Preprocessing
+    * Linear Regression
+    * Decision Tree Regression
+    * Gradient-boosted Tree Regression
 
 ````python
 from pyspark.ml.regression import GBTRegressor
@@ -184,50 +186,50 @@ gbt_rmse
 ````
 
 ## Recommendations
-* Collaborative Filtering
-* Content-Based Filtering
+    * Collaborative Filtering
+    * Content-Based Filtering
 
 ### Spark MLlib supports collaborative filtering
 
 1) Preprocessing - Collaborative Filtering
-* Alternating least squares.
-* Import ALS from pyspark.ml.recommendation.
-* Build a datafarme of user-item ratings.
+    * Alternating least squares.
+    * Import ALS from pyspark.ml.recommendation.
+    * Build a datafarme of user-item ratings.
 
 2) Create an ALS object
-* UserCol
-* itemCol
-* ratingCol
+    * UserCol
+    * itemCol
+    * ratingCol
 
 3) Train model using fit
 
 4) Validation
-* Create predictions using a transform of an ALS model using test data.
-* Create a RegressionEvaluator object.
-* Evaluate predictions using the evaluate function of the RegressionEvaluator.
+    * Create predictions using a transform of an ALS model using test data.
+    * Create a RegressionEvaluator object.
+    * Evaluate predictions using the evaluate function of the RegressionEvaluator.
 
 ## Process Summary
 1) Preprocessing
-* Load data into DF.
-* Include headers, or column names, in text files.
-* Use inferSchema=True.
-* Use VectorAssembler to create feature vectors.
-* Use StringIndexer to map from string to numeric indexes.
+    * Load data into DF.
+    * Include headers, or column names, in text files.
+    * Use inferSchema=True.
+    * Use VectorAssembler to create feature vectors.
+    * Use StringIndexer to map from string to numeric indexes.
 
 2) Building Models
-* Split data into training and test sets.
-* Fit models using training data.
-* Create predictions by applying a transform to the test data.
+    * Split data into training and test sets.
+    * Fit models using training data.
+    * Create predictions by applying a transform to the test data.
 
 3) Validating Models
-* Use MLib evaluators (MulticlassClassificationEvaluator, RegressionEvaluator).
-* Experiment with multiple algorithms.
-* Vary hyperparamenters.
+    * Use MLib evaluators (MulticlassClassificationEvaluator, RegressionEvaluator).
+    * Experiment with multiple algorithms.
+    * Vary hyperparamenters.
 
 #### For future, explore:
-* MLlib Docs
-* Kaggle
-* AWS Data Sets
+    * MLlib Docs
+    * Kaggle
+    * AWS Data Sets
 
 
 
